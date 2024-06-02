@@ -1,4 +1,4 @@
-package com.mycompany.finalproject;
+package com.mycompany.AplikasiInventaris;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
