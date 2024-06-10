@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+        <!-- Dependency for Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -21,7 +22,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>com.mycompany.aplikasiinventaris.AplikasiInventaris</mainClass>
+                    <mainClass>com.mycompany.AplikasiInventaris.AplikasiInventaris</mainClass>
                 </configuration>
             </plugin>
         </plugins>
