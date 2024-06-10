@@ -1,25 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.AplikasiInventaris;
 
-/**
- *
- * @author REYHANFISENA
- */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class AplikasiInventaris {
     private Inventaris inventaris;
+    private JTextArea textArea;
 
     public AplikasiInventaris() {
         inventaris = new Inventaris();
         inisialisasiInventaris();
         inisialisasiUI();
+        redirectSystemStreams();
     }
 
     private void inisialisasiInventaris() {
@@ -35,7 +32,7 @@ public class AplikasiInventaris {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setEditable(false);
         frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
 
@@ -87,6 +84,36 @@ public class AplikasiInventaris {
         frame.setVisible(true);
     }
 
+    private void updateTextArea(final String text) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                textArea.append(text);
+            }
+        });
+    }
+
+    private void redirectSystemStreams() {
+        OutputStream out = new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+                updateTextArea(String.valueOf((char) b));
+            }
+
+            @Override
+            public void write(byte[] b, int off, int len) throws IOException {
+                updateTextArea(new String(b, off, len));
+            }
+
+            @Override
+            public void write(byte[] b) throws IOException {
+                write(b, 0, b.length);
+            }
+        };
+
+        System.setOut(new PrintStream(out, true));
+        System.setErr(new PrintStream(out, true));
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -96,4 +123,3 @@ public class AplikasiInventaris {
         });
     }
 }
-
