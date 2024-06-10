@@ -53,4 +53,12 @@ public class Inventaris {
             p.tampilkanInfoPengguna();
         }
     }
+
+    Iterable<Peralatan> getPeralatan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Iterable<Pengguna> getPengguna() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -40,4 +40,12 @@ public class Peralatan {
     public String toString() {
         return nama + " (ID: " + id + ", Jumlah: " + jumlah + ")";
     }
+
+    Object getID() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Object getKategori() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
