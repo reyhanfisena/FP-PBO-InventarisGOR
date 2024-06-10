@@ -160,7 +160,7 @@ public class AplikasiInventaris {
         System.setOut(new PrintStream(out, true));
         System.setErr(new PrintStream(out, true));
     }
-
+// udah diubahh
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
