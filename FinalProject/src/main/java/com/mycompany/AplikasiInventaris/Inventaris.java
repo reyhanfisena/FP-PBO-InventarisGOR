@@ -1,64 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.AplikasiInventaris;
-
-/**
- *
- * @author REYHANFISENA
- */
 
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
 
 public class Inventaris {
-    private List<Peralatan> peralatan;
-    private List<Pengguna> pengguna;
+    private final List<Peralatan> daftarPeralatan;
+    private final List<Pengguna> daftarPengguna;
 
     public Inventaris() {
-        peralatan = new ArrayList<>();
-        pengguna = new ArrayList<>();
+        daftarPeralatan = new ArrayList<>();
+        daftarPengguna = new ArrayList<>();
     }
 
     public void tambahPeralatan(Peralatan peralatan) {
-        this.peralatan.add(peralatan);
+        daftarPeralatan.add(peralatan);
+    }
+
+    public List<Peralatan> getPeralatan() {
+        return daftarPeralatan;
     }
 
     public void tambahPengguna(Pengguna pengguna) {
-        this.pengguna.add(pengguna);
+        daftarPengguna.add(pengguna);
     }
 
-    public String keJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+    public List<Pengguna> getPengguna() {
+        return daftarPengguna;
     }
 
-    public void dariJson(String json) {
-        Gson gson = new Gson();
-        Inventaris inventaris = gson.fromJson(json, Inventaris.class);
-        this.peralatan = inventaris.peralatan;
-        this.pengguna = inventaris.pengguna;
-    }
-
-    public void tampilkanPeralatan() {
-        for (Peralatan p : peralatan) {
-            System.out.println(p);
+    public Pengguna cariPengguna(String id) {
+        for (Pengguna pengguna : daftarPengguna) {
+            if (pengguna.getID().equals(id)) {
+                return pengguna;
+            }
         }
+        return null;
     }
 
-    public void tampilkanPengguna() {
-        for (Pengguna p : pengguna) {
-            p.tampilkanInfoPengguna();
+    public void hapusPengguna(Pengguna pengguna) {
+        daftarPengguna.remove(pengguna);
+    }
+
+    public Peralatan cariPeralatan(String id) {
+        for (Peralatan peralatan : daftarPeralatan) {
+            if (peralatan.getID().equals(id)) {
+                return peralatan;
+            }
         }
+        return null;
     }
 
-    Iterable<Peralatan> getPeralatan() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    Iterable<Pengguna> getPengguna() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void hapusPeralatan(Peralatan peralatan) {
+        daftarPeralatan.remove(peralatan);
     }
 }

@@ -32,7 +32,7 @@ public class AplikasiInventaris {
 
     private void inisialisasiUI() {
         JFrame frame = new JFrame("Sistem Manajemen Peralatan Olahraga");
-        frame.setSize(800, 400);
+        frame.setSize(800, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -49,20 +49,26 @@ public class AplikasiInventaris {
         JScrollPane scrollPane = new JScrollPane(table);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 0));
         buttonPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
         JButton tampilkanPeralatanButton = new JButton("Tampilkan Peralatan");
         JButton tampilkanPenggunaButton = new JButton("Tampilkan Pengguna");
-        JButton simpanButton = new JButton("Simpan ke JSON");
-        JButton muatButton = new JButton("Muat dari JSON");
+        JButton hapusPenggunaButton = new JButton("Hapus Pengguna");
+        JButton tambahPenggunaButton = new JButton("Tambah Pengguna");
 
         buttonPanel.add(tampilkanPeralatanButton);
         buttonPanel.add(tampilkanPenggunaButton);
-        buttonPanel.add(simpanButton);
-        buttonPanel.add(muatButton);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(hapusPenggunaButton);
+        buttonPanel.add(tambahPenggunaButton);
+        mainPanel.add(buttonPanel, BorderLayout.NORTH);
 
-        frame.add(mainPanel);
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane textScrollPane = new JScrollPane(textArea);
+        textScrollPane.setPreferredSize(new Dimension(800, 100));
+        mainPanel.add(textScrollPane, BorderLayout.SOUTH);
+
+        frame.add(mainPanel, BorderLayout.CENTER);
 
         // Menerapkan gaya visual yang lebih menarik
         frame.getContentPane().setBackground(new Color(240, 240, 240));
@@ -84,21 +90,23 @@ public class AplikasiInventaris {
             }
         });
 
-        simpanButton.addActionListener(new ActionListener() {
+        hapusPenggunaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                simpanKeJSON();
+                hapusPengguna();
             }
         });
 
-        muatButton.addActionListener(new ActionListener() {
+        tambahPenggunaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                muatDariJSON();
+                tambahPengguna();
             }
         });
 
         frame.setVisible(true);
+        frame.revalidate();
+        frame.repaint();
     }
 
     private void tampilkanPeralatan() {
@@ -114,27 +122,44 @@ public class AplikasiInventaris {
         tableModel.setRowCount(0); // Menghapus semua baris yang ada sebelumnya
 
         for (Pengguna pengguna : inventaris.getPengguna()) {
-            Object[] row = {pengguna.getNama(), pengguna.getID()};
+            Object[] row = {pengguna.getNama(), pengguna.getID(), "-", "-"}; // Menampilkan data pengguna di tabel
             tableModel.addRow(row);
         }
     }
 
-    private void simpanKeJSON() {
-        // Implementasi menyimpan ke JSON
-        // Tidak termasuk dalam ruang lingkup pembaruan ini
-        textArea.setText("Simpan ke JSON");
+    private void hapusPengguna() {
+        String id = JOptionPane.showInputDialog(null, "Masukkan ID pengguna yang ingin dihapus:");
+        if (id != null && !id.trim().isEmpty()) {
+            Pengguna pengguna = inventaris.cariPengguna(id);
+            if (pengguna != null) {
+                inventaris.hapusPengguna(pengguna);
+                textArea.setText("Pengguna dengan ID: " + id + " berhasil dihapus.");
+                tampilkanPengguna();
+            } else {
+                textArea.setText("Pengguna dengan ID: " + id + " tidak ditemukan.");
+            }
+        } else {
+            textArea.setText("ID pengguna tidak valid.");
+        }
     }
 
-    private void muatDariJSON() {
-        // Implementasi memuat dari JSON
-        // Tidak termasuk dalam ruang lingkup pembaruan ini
-        textArea.setText("Muat dari JSON");
+    private void tambahPengguna() {
+        String nama = JOptionPane.showInputDialog(null, "Masukkan nama pengguna:");
+        String id = JOptionPane.showInputDialog(null, "Masukkan ID pengguna:");
+        if (nama != null && !nama.trim().isEmpty() && id != null && !id.trim().isEmpty()) {
+            Pengguna pengguna = new Pengguna(nama, id);
+            inventaris.tambahPengguna(pengguna);
+            textArea.setText("Pengguna baru dengan ID: " + id + " berhasil ditambahkan.");
+            tampilkanPengguna();
+        } else {
+            textArea.setText("Nama atau ID pengguna tidak valid.");
+        }
     }
 
     private void updateTextArea(final String text) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                textArea.append(text);
+                textArea.append(text + "\n");
             }
         });
     }
@@ -160,7 +185,7 @@ public class AplikasiInventaris {
         System.setOut(new PrintStream(out, true));
         System.setErr(new PrintStream(out, true));
     }
-// udah diubahh
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

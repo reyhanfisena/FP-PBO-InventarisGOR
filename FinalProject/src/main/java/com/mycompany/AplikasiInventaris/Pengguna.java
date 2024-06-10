@@ -1,35 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.AplikasiInventaris;
 
-/**
- *
- * @author REYHANFISENA
- */
-
-public abstract class Pengguna {
+public class Pengguna {
     protected String nama;
-    protected String userId;
+    protected String id;
 
-    public Pengguna(String nama, String userId) {
+    public Pengguna(String nama, String id) {
         this.nama = nama;
-        this.userId = userId;
+        this.id = id;
     }
 
     public String getNama() {
         return nama;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getID() {
+        return id;
     }
 
-    public abstract void tampilkanInfoPengguna();
-
-    Object getID() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Override
+    public String toString() {
+        return nama + " (ID: " + id + ")";
     }
 }
-
