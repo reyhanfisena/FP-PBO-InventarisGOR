@@ -190,7 +190,7 @@ public class AplikasiInventaris {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AplikasiInventaris aplikasiInventaris = new AplikasiInventaris();
+                new LoginForm(); // Panggil LoginForm di sini, bukan AplikasiInventaris
             }
         });
     }
