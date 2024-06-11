@@ -1,8 +1,8 @@
 package com.mycompany.AplikasiInventaris;
 
 public class Pengguna {
-    protected String nama;
-    protected String id;
+    private String nama;
+    private String id;
 
     public Pengguna(String nama, String id) {
         this.nama = nama;

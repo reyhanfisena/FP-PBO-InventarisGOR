@@ -4,53 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventaris {
-    private final List<Peralatan> daftarPeralatan;
-    private final List<Pengguna> daftarPengguna;
+    private List<Peralatan> peralatanList;
+    private List<Pengguna> penggunaList;
 
     public Inventaris() {
-        daftarPeralatan = new ArrayList<>();
-        daftarPengguna = new ArrayList<>();
+        peralatanList = new ArrayList<>();
+        penggunaList = new ArrayList<>();
     }
 
     public void tambahPeralatan(Peralatan peralatan) {
-        daftarPeralatan.add(peralatan);
-    }
-
-    public List<Peralatan> getPeralatan() {
-        return daftarPeralatan;
+        peralatanList.add(peralatan);
     }
 
     public void tambahPengguna(Pengguna pengguna) {
-        daftarPengguna.add(pengguna);
+        penggunaList.add(pengguna);
+    }
+
+    public List<Peralatan> getPeralatan() {
+        return peralatanList;
     }
 
     public List<Pengguna> getPengguna() {
-        return daftarPengguna;
-    }
-
-    public Pengguna cariPengguna(String id) {
-        for (Pengguna pengguna : daftarPengguna) {
-            if (pengguna.getID().equals(id)) {
-                return pengguna;
-            }
-        }
-        return null;
-    }
-
-    public void hapusPengguna(Pengguna pengguna) {
-        daftarPengguna.remove(pengguna);
-    }
-
-    public Peralatan cariPeralatan(String id) {
-        for (Peralatan peralatan : daftarPeralatan) {
-            if (peralatan.getID().equals(id)) {
-                return peralatan;
-            }
-        }
-        return null;
-    }
-
-    public void hapusPeralatan(Peralatan peralatan) {
-        daftarPeralatan.remove(peralatan);
+        return penggunaList;
     }
 }
