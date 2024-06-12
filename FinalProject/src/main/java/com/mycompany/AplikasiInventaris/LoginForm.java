@@ -17,7 +17,7 @@ public class LoginForm extends JFrame {
 
     public LoginForm() {
         setTitle("Login Admin");
-        setSize(300, 200);
+        setSize(1000, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(4, 1));
 

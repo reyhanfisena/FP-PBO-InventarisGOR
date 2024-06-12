@@ -13,7 +13,7 @@ public class Pelatih extends Pengguna {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + " (Olahraga: " + olahraga + ")";
+    public String getRole() {
+        return "Pelatih";
     }
 }

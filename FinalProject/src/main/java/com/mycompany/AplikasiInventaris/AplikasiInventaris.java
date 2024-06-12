@@ -24,15 +24,20 @@ public class AplikasiInventaris {
     }
 
     private void inisialisasiInventaris() {
-        inventaris.tambahPeralatan(new Peralatan("Bola Sepak", "B1", 10, "Sepak Bola"));
+        inventaris.tambahPeralatan(new Peralatan("Bola Basket", "BB", 10, "Bola Basket"));
+        inventaris.tambahPeralatan(new Peralatan("Ring Basket", "RB", 2, "Ring Basket"));
+        inventaris.tambahPeralatan(new Peralatan("Bola Sepak", "BS", 10, "Bola Futsal"));
+        inventaris.tambahPeralatan(new Peralatan("Gawang Futsal", "GW", 4, "Gawang Futsal"));
         inventaris.tambahPeralatan(new Peralatan("Jaring Voli", "J1", 5, "Bola Voli"));
+        inventaris.tambahPeralatan(new Peralatan("Bola Voli", "BV", 10, "Bola Voli"));
+        inventaris.tambahPeralatan(new Peralatan("Jaring Badminton", "J2", 8, "Jaring Badminton"));
         inventaris.tambahPengguna(new Admin("Alice", "A1"));
         inventaris.tambahPengguna(new Pelatih("Bob", "P1", "Basket"));
     }
 
     private void inisialisasiUI() {
         JFrame frame = new JFrame("Sistem Manajemen Peralatan Olahraga");
-        frame.setSize(800, 400);
+        frame.setSize(1000, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -40,11 +45,6 @@ public class AplikasiInventaris {
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         tableModel = new DefaultTableModel();
-        tableModel.addColumn("Nama");
-        tableModel.addColumn("ID");
-        tableModel.addColumn("Jumlah");
-        tableModel.addColumn("Kategori");
-
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
@@ -121,6 +121,7 @@ public class AplikasiInventaris {
 
     private void tampilkanPeralatan() {
         tableModel.setRowCount(0); // Menghapus semua baris yang ada sebelumnya
+        tableModel.setColumnIdentifiers(new String[]{"Nama", "ID", "Jumlah", "Kategori"}); // Set column headers for peralatan
 
         for (Peralatan peralatan : inventaris.getPeralatan()) {
             Object[] row = {peralatan.getNama(), peralatan.getID(), peralatan.getJumlah(), peralatan.getKategori()};
@@ -130,9 +131,10 @@ public class AplikasiInventaris {
 
     private void tampilkanPengguna() {
         tableModel.setRowCount(0); // Menghapus semua baris yang ada sebelumnya
+        tableModel.setColumnIdentifiers(new String[]{"ID", "Nama", "Role"}); // Set column headers for pengguna
 
         for (Pengguna pengguna : inventaris.getPengguna()) {
-            Object[] row = {pengguna.getNama(), pengguna.getID()};
+            Object[] row = {pengguna.getID(), pengguna.getNama(), pengguna.getRole()};
             tableModel.addRow(row);
         }
     }
@@ -245,7 +247,7 @@ public class AplikasiInventaris {
         System.setErr(new PrintStream(out, true));
     }
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

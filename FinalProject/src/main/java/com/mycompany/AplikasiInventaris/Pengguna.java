@@ -17,8 +17,7 @@ public class Pengguna {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return nama + " (ID: " + id + ")";
+    public String getRole() {
+        return "Pengguna";
     }
 }
