@@ -10,10 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class LoginForm extends JFrame {
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
-    private JLabel statusLabel;
+    private javax.swing.JTextField usernameField;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JLabel statusLabel;
 
     public LoginForm() {
         setTitle("Login Admin");

@@ -12,9 +12,9 @@ import java.io.PrintStream;
 
 public class AplikasiInventaris {
     private final Inventaris inventaris;
-    private JTable table;
-    private DefaultTableModel tableModel;
-    private JTextArea textArea;
+    private javax.swing.JTable table;
+    private javax.swing.table.DefaultTableModel tableModel;
+    private javax.swing.JTextArea textArea;
 
     public AplikasiInventaris() {
         inventaris = new Inventaris();
